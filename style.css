@@ -1,0 +1,613 @@
+/* Fonts */
+@font-face {
+  font-family: "Ubuntu";
+  src: url("fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Overpass";
+  src: url("fonts/Overpass/Overpass-VariableFont_wght.ttf");
+}
+
+/* Variables */
+:root {
+  --cta-txt: hsl(356, 100%, 66%);
+  --cta-hover-bg: hsl(355, 100%, 74%);
+  --heading-clr: hsl(208, 49%, 24%);
+  --footer-txt: hsl(240, 2%, 79%);
+  --dark-greyish: hsl(207, 13%, 34%);
+  --faint-dark-greyish: hsl(207, 13%, 34%, 0.2);
+  --footer-bg: hsl(240, 10%, 16%);
+  --main-gradient: linear-gradient(
+    to right,
+    hsl(13, 100%, 72%),
+    hsl(353, 100%, 62%)
+  );
+  --bg-gradient-body: linear-gradient(
+    to right,
+    hsl(237, 17%, 21%),
+    hsl(237, 23%, 32%)
+  );
+
+  --transition-time: 0.3s;
+}
+
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Overpass";
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+button {
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+
+  border-radius: 2rem;
+  padding: 12px 1.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.filled-btn {
+  color: var(--cta-txt);
+  background-color: white;
+}
+
+button.filled-btn:hover {
+  background-color: var(--cta-hover-bg);
+  color: white;
+}
+
+button.bordered-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+button.bordered-btn:hover {
+  background-color: white;
+  color: var(--cta-txt);
+}
+/* ================================ Main ================================ */
+/* ======== Intro ======== */
+
+.intro {
+  background-image: var(--main-gradient);
+  border-bottom-left-radius: 3rem;
+}
+
+.intro nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Right part relative to logo and links */
+.intro nav .logo-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.intro nav .logo-links img {
+  display: block;
+  margin-right: 2rem;
+}
+
+.intro nav .logo-links > ul {
+  display: flex;
+}
+
+.intro nav .logo-links > ul li {
+  padding: 0 1rem;
+  position: relative;
+  color: var(--dark-greyish);
+}
+
+/* Down arrow near links */
+.intro nav .logo-links > ul > li a i {
+  color: var(--dark-greyish);
+  margin-left: 5px;
+  transition: var(--transition-time);
+  display: inline-block;
+}
+
+/* Rotating down arrow to become up arrow */
+.intro nav .logo-links > ul > li:hover i {
+  transform: rotate(180deg);
+  color: white;
+}
+
+.intro nav .logo-links > ul li a {
+  position: relative;
+  transition: var(--transition-time);
+}
+
+/* Creating animated border on hover */
+.intro nav .logo-links > ul li a::after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: var(--transition-time);
+}
+
+.intro nav .logo-links > ul li:hover a {
+  color: white;
+}
+
+.intro nav .logo-links > ul li a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Sub list styling */
+.intro nav .logo-links > ul li ul {
+  position: absolute;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 1rem 0 rgb(0 0 0 / 0.3);
+  top: 30px;
+  transform: scaleY(0);
+  transition: var(--transition-time);
+  transform-origin: top;
+}
+
+.intro nav .logo-links > ul > li:hover ul {
+  transform: scaleY(1);
+}
+
+/* separating sub list elements */
+.intro nav .logo-links > ul > li > ul li {
+  margin-bottom: 1rem;
+  transition: var(--transition-time);
+  cursor: pointer;
+}
+
+.intro nav .logo-links > ul > li > ul li:hover {
+  font-weight: bold;
+}
+
+/* Left part relative to sign up and login buttons */
+.sign-in-buttons > a {
+  color: white;
+  margin-right: 10px;
+}
+
+/* Hiding mobile menu in desktop view*/
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 851px) {
+  .intro .container > nav > .logo-links > ul,
+  .intro nav > .sign-in-buttons {
+    display: none;
+  }
+
+  .intro nav {
+    position: relative;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .mobile-menu .logo-links {
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    left: 0;
+    top: 3.5rem;
+    text-align: center;
+    transform: scaleY(0);
+    transition: var(--transition-time);
+    transform-origin: top;
+  }
+
+  .intro .mobile-menu .logo-links > ul {
+    display: initial;
+  }
+
+  .intro .mobile-menu .logo-links > ul > li {
+    margin-bottom: 1.5rem;
+  }
+
+  .intro nav .logo-links > ul > li:hover a {
+    color: var(--dark-greyish);
+  }
+
+  .intro nav .logo-links > ul > li i {
+    color: var(--cta-txt);
+  }
+
+  .intro nav .logo-links > ul > li:hover i {
+    color: var(--cta-txt);
+  }
+
+  .intro .mobile-menu .logo-links > ul > li::after {
+    color: var(--cta-txt);
+  }
+
+  .intro .mobile-menu .logo-links > ul > li > ul {
+    position: relative;
+    background-color: var(--faint-dark-greyish);
+    top: 12px;
+    height: 0;
+  }
+
+  .intro .mobile-menu .logo-links > ul > li:hover > ul {
+    height: 100%;
+  }
+
+  .mobile-menu span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: white;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+
+  .mobile-menu:hover .logo-links {
+    transform: scaleY(1);
+  }
+
+  .mobile-menu:hover span:first-child {
+    transform: rotate(45deg) translate(0px, 10px);
+    transform-origin: top;
+  }
+
+  .mobile-menu:hover span:nth-child(2) {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
+  .mobile-menu:hover span:last-of-type {
+    transform: rotate(-45deg) translate(-1px, -11px);
+    transform-origin: top;
+  }
+
+  .mobile-menu .sign-in-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .mobile-menu .sign-in-buttons > a {
+    color: var(--dark-greyish);
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .mobile-menu .sign-in-buttons button {
+    background-image: var(--main-gradient);
+    color: white;
+    margin-top: 1rem;
+  }
+
+  .mobile-menu hr {
+    width: 90%;
+  }
+}
+
+/* ======== Hero ======== */
+
+.hero {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.hero .main-text {
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.hero .main-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero .filled-btn {
+  margin-right: 1rem;
+}
+
+@media (max-width: 426px) {
+  .hero .main-text h1 {
+    font-size: 2rem;
+  }
+}
+
+/* ======== First Part ======== */
+
+.design {
+  padding: 2.5rem 0;
+  margin: 1rem 0;
+}
+
+.design h2 {
+  text-align: center;
+  font-size: 1.75rem;
+  text-transform: capitalize;
+  color: var(--heading-clr);
+}
+
+.design .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.design .container .text-side,
+.design .container .img-side {
+  flex: 1;
+}
+
+.design .container .text-side {
+  margin-right: 1.5rem;
+}
+
+.design .container .text-side .section {
+  margin: 2.5rem 0;
+}
+
+.design .container .text-side .section h3 {
+  font-size: 1.5rem;
+  color: var(--heading-clr);
+  margin-bottom: 1rem;
+}
+
+.design .container .text-side .section p {
+  line-height: 1.6;
+  color: var(--dark-greyish);
+}
+
+/* ======== Second Part ======== */
+
+.design .container img {
+  max-width: 100%;
+  display: block;
+  position: relative;
+}
+
+.design img.mobile-img {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .design .container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .design img.mobile-img {
+    display: block;
+  }
+
+  .design img.desktop-img {
+    display: none;
+  }
+}
+
+/* ======== Mobile section ======== */
+
+.mobile-app {
+  background-image: var(--bg-gradient-body);
+  position: relative;
+  padding: 1rem;
+  border-radius: 0 2rem;
+}
+
+.mobile-app .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.mobile-app .container .mobile-img {
+  flex: 1;
+  height: 150px;
+  margin-top: -225px;
+}
+
+.mobile-app .container img {
+  display: block;
+  max-width: 400px;
+}
+
+.mobile-app .container .mobile-txt {
+  color: white;
+  flex: 2;
+}
+
+.mobile-app .container .mobile-txt h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.mobile-app .container .mobile-txt p {
+  line-height: 1.6;
+}
+
+@media (max-width: 851px) {
+  .mobile-app .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .mobile-app .container .mobile-img {
+    margin-top: -135px;
+  }
+}
+
+/* ======== Laptop section ======== */
+
+.laptop {
+  margin: 5rem 0;
+}
+
+.laptop .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.laptop .container .laptop-img {
+  flex: 1;
+}
+
+.laptop .container .text {
+  flex: 1;
+}
+
+.laptop .container .text .block {
+  margin: 1.5rem 0;
+}
+
+.laptop .container .text .block h3 {
+  color: var(--heading-clr);
+  font-size: 2.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.laptop .container .text .block p {
+  line-height: 1.6;
+  color: var(--dark-greyish);
+}
+
+.laptop .container img {
+  max-width: 100%;
+  display: block;
+}
+
+.laptop .container img.mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .laptop .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .laptop .container img.mobile {
+    display: block;
+  }
+
+  .laptop .container img.desktop {
+    display: none;
+  }
+
+  .laptop .container .text .block {
+    margin: 2rem 0;
+  }
+}
+
+/* ======== Footer ======== */
+footer {
+  background-color: var(--footer-bg);
+  border-top-left-radius: 2rem;
+  padding: 1.5rem;
+  color: var(--footer-txt);
+}
+
+footer .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer .container ul li {
+  width: fit-content;
+}
+
+footer .container ul li:first-child {
+  color: white;
+  margin-bottom: 3rem;
+}
+
+footer .container ul li:first-child ~ li {
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  transition: var(--transition-time);
+  position: relative;
+}
+
+footer .container ul li:first-child ~ li::after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  display: block;
+  background-color: var(--footer-txt);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition-time);
+}
+
+footer .container ul li:first-child ~ li:hover::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 767px) {
+  footer {
+    padding: 2rem;
+  }
+  footer .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer .container ul {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  footer .container ul li {
+    width: initial;
+  }
+
+  footer .container ul li:first-child {
+    margin-bottom: 2rem;
+  }
+}
